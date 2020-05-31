@@ -1,9 +1,12 @@
 import 'package:app/services/auth.dart';
+import 'package:app/views/chatroomsScreem.dart';
 import 'package:app/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SignUp extends StatefulWidget {
+  final Function toggle;
+  SignUp(this.toggle);
   @override
   _SignUpState createState() => _SignUpState();
 }
@@ -25,10 +28,12 @@ class _SignUpState extends State<SignUp> {
         isLoading = true;
       });
       authMethods
-          .signInWithEmailAndPassword(emailTextEditingController.text,
+          .signUpWithEmailAndPassword(emailTextEditingController.text,
               passwordTextEditingController.text)
           .then((val) {
-        print("$val");
+        print("${val.userId}");
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => ChatRoomsScreen()));
       });
     }
   }
@@ -116,7 +121,9 @@ class _SignUpState extends State<SignUp> {
                       ),
                       SizedBox(height: 10.0),
                       GestureDetector(
-                        onTap: () => signMeUp(),
+                        onTap: () {
+                          signMeUp();
+                        },
                         child: Container(
                           alignment: Alignment.center,
                           height: 50.0,
@@ -172,7 +179,9 @@ class _SignUpState extends State<SignUp> {
                               ),
                             ),
                             GestureDetector(
-                              onTap: () => print("Sign In"),
+                              onTap: () {
+                                widget.toggle();
+                              },
                               child: Text(
                                 " Sign In",
                                 style: GoogleFonts.lato(

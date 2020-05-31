@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class SignIn extends StatefulWidget {
+  final Function toggle;
+  SignIn(this.toggle);
   @override
   _SignInState createState() => _SignInState();
 }
@@ -110,7 +112,9 @@ class _SignInState extends State<SignIn> {
                       ),
                     ),
                     GestureDetector(
-                      onTap: () => print("Register Now"),
+                      onTap: () {
+                        widget.toggle();
+                      },
                       child: Text(
                         " Create a new one",
                         style: GoogleFonts.lato(
