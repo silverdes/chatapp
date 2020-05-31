@@ -1,3 +1,4 @@
+//switching to windows
 class DatabaseMethods {
   getUserByusername(String username) {}
 
